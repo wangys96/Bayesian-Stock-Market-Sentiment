@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="richard w.">
+    <title>热点 - 股市舆情分析系统</title>
+    <!-- Bootstrap CSS -->    
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 自定义 CSS  -->
+    {% load static %}
+    <link href="{% static 'Sentiment/global.css' %}" rel="stylesheet">
+    <link href="{%static 'Sentiment/favicon.ico' %}" rel="shortcut icon">
+  </head>
+
+  <body>
+    <!-- 导航栏 -->   
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">
+          <span data-feather="sun"></span>股市舆情分析系统
+      </a>
+      <form method="get" action="/search" class="w-100" onsubmit="return search_check_top()">
+        <input id="search_input_top" name="target" class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      </form>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">          
+          <a class="nav-link" href="#">
+            <span data-feather="github"></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid"> 
+      <div class="row">
+        <!-- 侧栏 -->
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">          
+          <div class="sidebar-fixed">
+            <!-- 第1部分 -->
+            <ul class="nav flex-column nav-pills">                  
+                <li class="nav-item">
+                  <a class="nav-link" href="/">
+                    <span data-feather="home"></span>
+                    主页
+                    <!--<span class="sr-only">(current)</span>-->
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/search">
+                    <span data-feather="search"></span>
+                    个股详情
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="/hot">
+                    <span data-feather="sun"></span>
+                    近期热点
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/text">
+                    <span data-feather="file-text"></span>
+                    文本分析
+                  </a>
+                </li>
+
+            </ul>
+          </div>
+        </nav>
+
+        <!-- 主内容 -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">近期热点</h1>
+          </div>
+
+          <!--词云-->
+          <div id="echarts_wc" style="width: 100%;height:400px;"></div>
+
+          <!--热门列表-->
+          <h5 style="font-size:20px;margin-left:1%;"><strong>热门论坛</strong></h5>
+          <table class="table table-striped text-center" id="hot_list">
+            <thead style="font-size:18px">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">热门股票</th>
+                <th scope="col">最新价格</th>
+                <th scope="col">舆情倾向</th>
+              </tr>
+            </thead>
+            <!--TO RENDER-->
+          </table>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.14.5/umd/popper.min.js"></script>    
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <!-- Feather-Icons -->
+    <script src="https://cdn.staticfile.org/feather-icons/4.9.0/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    <!-- Echarts -->
+    <script src="https://cdn.staticfile.org/echarts/4.2.0-rc.2/echarts.min.js"></script>
+    <script src="{% static 'Sentiment/echarts-wordcloud.min.js' %}"></script>
+    <!-- Global -->
+    <script src="{% static 'Sentiment/global.js' %}"></script>
+    <!-- Others -->
+    <script>
+      var tdata = {{table_data|safe}};
+      var wdata_raw = {{wordcloud_data|safe}};
+    </script>
+    <script src="{% static 'Sentiment/hot.js' %}"></script>
+    
+  </body>
+
+</html>
