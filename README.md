@@ -1,57 +1,75 @@
 
-¹ÉÆ±ÊĞ³¡ÓßÇéÎÄ±¾·ÖÎöÏµÍ³ 
+è‚¡ç¥¨å¸‚åœºèˆ†æƒ…æ–‡æœ¬åˆ†æç³»ç»Ÿ 
 ===
 
 ### China Stock Market Text Sentiment Anlysis
 
-±¾¿Æ±ÏÒµÉè¼Æ´æµµ¡£ÀûÓÃÍøÂçÅÀ³æ´Ó¶«·½²Æ¸»¹É°É×Ô¶¯ÌáÈ¡ÎÄ±¾Êı¾İ£¬Ê¹ÓÃjieba·Ö´Ê¡¢±´Ò¶Ë¹Ëã·¨½øĞĞÇé¸Ğ·ÖÎö£¬¸ø³öÊĞ³¡¡¢¸ö¹ÉµÄÓßÇéÁ¿»¯·ÖÊı£¬Ê¹ÓÃMySQL´æ´¢Êı¾İ£¬Ê¹ÓÃDjangoºÍECharts½øĞĞ¿ÉÊÓ»¯Õ¹Ê¾¡£
+æœ¬ç§‘æ¯•ä¸šè®¾è®¡å­˜æ¡£ã€‚åˆ©ç”¨ç½‘ç»œçˆ¬è™«ä»ä¸œæ–¹è´¢å¯Œè‚¡å§è‡ªåŠ¨æå–æ–‡æœ¬æ•°æ®ï¼Œä½¿ç”¨jiebaåˆ†è¯ã€è´å¶æ–¯ç®—æ³•è¿›è¡Œæƒ…æ„Ÿåˆ†æï¼Œç»™å‡ºå¸‚åœºã€ä¸ªè‚¡çš„èˆ†æƒ…é‡åŒ–åˆ†æ•°ï¼Œä½¿ç”¨MySQLå­˜å‚¨æ•°æ®ï¼Œä½¿ç”¨Djangoå’ŒEChartsè¿›è¡Œå¯è§†åŒ–å±•ç¤ºã€‚
 
-## ÒÀÀµ
-> Python>=3.6.0  
-> Django>=2.1.0  
-> requests>=2.19.0  
-> scikit-learn>=0.19  
-> tushare  
-> jieba  
-> mysqlclient  
+## æ¦‚è§ˆ
+![ä¸»é¡µ1](https://raw.githubusercontent.com/wangys96/Bayesian-Stock-Market-Sentiment/master/pic/home.png)
 
+![ä¸»é¡µ2](https://raw.githubusercontent.com/wangys96/Bayesian-Stock-Market-Sentiment/master/pic/home2.png)
 
-## ÎÄ¼şÄ¿Â¼
+![äº¤äº’æ¼”ç¤º](https://raw.githubusercontent.com/wangys96/Bayesian-Stock-Market-Sentiment/master/pic/interact.png)
+
+![ä¸ªè‚¡](https://raw.githubusercontent.com/wangys96/Bayesian-Stock-Market-Sentiment/master/pic/indiv.png)
+
+![è¿‘æœŸçƒ­ç‚¹](https://raw.githubusercontent.com/wangys96/Bayesian-Stock-Market-Sentiment/master/pic/hot.png)
+
+![æœç´¢](https://raw.githubusercontent.com/wangys96/Bayesian-Stock-Market-Sentiment/master/pic/search.png)
+
+![æ–‡æœ¬åˆ†æ](https://raw.githubusercontent.com/wangys96/Bayesian-Stock-Market-Sentiment/master/pic/text.png)
+
+![æ–‡æœ¬åˆ†æ](https://raw.githubusercontent.com/wangys96/Bayesian-Stock-Market-Sentiment/master/pic/text2.png)
+
+## ä¾èµ–
 ```
-©À©¤©¤ data  
-©¦   ©À©¤©¤ clf                  #±´Ò¶Ë¹Ä£ĞÍ  
-©¦   ©À©¤©¤ tfidf                #TF-IDFÄ£ĞÍ  
-©¦   ©À©¤©¤ vect                 #´ÊÆµÄ£ĞÍ  
-©¦   ©À©¤©¤ worddict             #ÓÃ»§´Êµä  
-©¦   ©À©¤©¤ stop_words.txt       #Í£ÓÃ´Ê´Êµä   
-©À©¤©¤ InvisibleHand  
-©¦   ©À©¤©¤ settings.py          #ÏîÄ¿ÅäÖÃ  
-©¦   ©À©¤©¤ urls.py              #ÏîÄ¿Â·ÓÉ¶¨Òå  
-©¦   ©¸©¤©¤ wsgi.py              #HTTP·şÎñÆ÷µÄ½Ó¿Ú  
-©¸©¤©¤ Sentiment  
-    ©¸©¤©¤ templates            #ÍøÒ³¾²Ì¬ÎÄ¼şÄ¿Â¼
-        ©¸©¤©¤ Sentiment  
-            ©À©¤©¤ home.js      #Ö÷Ò³½Å±¾  
-            ©À©¤©¤ 404.js       #Î´ÕÒµ½Ò³Ãæ½Å±¾  
-            ©À©¤©¤ search.js    #ËÑË÷Ò³½Å±¾  
-            ©À©¤©¤ hot.js       #½üÆÚÈÈµãÒ³Ãæ½Å±¾  
-            ©À©¤©¤ text.js      #ÎÄ±¾·ÖÎöÒ³Ãæ½Å±¾   
-            ©À©¤©¤ detial.js    #¸ö¹ÉÏêÇéÒ³Ãæ½Å±¾  
-            ©À©¤©¤ global.js    #ÍøÕ¾È«¾Ö½Å±¾  
-            ©¸©¤©¤ global.css   #ÍøÕ¾È«¾ÖÑùÊ½  
-    ©À©¤©¤ static               #ÍøÒ³¾²Ì¬ÎÄ¼şÄ¿Â¼  
-        ©¸©¤©¤ Sentiment   
-            ©À©¤©¤ home.html    #Ö÷Ò³Ä£°å  
-            ©À©¤©¤ 404.html     #Î´ÕÒµ½Ò³ÃæÄ£°å  
-            ©À©¤©¤ search.html  #ËÑË÷Ò³Ä£°å  
-            ©À©¤©¤ hot.html     #½üÆÚÈÈµãÒ³ÃæÄ£°å  
-            ©À©¤©¤ text.html    #ÎÄ±¾·ÖÎöÒ³ÃæÄ£°å   
-            ©¸©¤©¤ detail.html  #¸ö¹ÉÏêÇéÒ³ÃæÄ£°å  
-    ©À©¤©¤ admin.py             #DjangoºóÌ¨µÄ¹ÜÀíÒ³Ãæ  
-    ©À©¤©¤ apps.py              #Ó¦ÓÃÅäÖÃ  
-    ©À©¤©¤ models.py            #Êı¾İÄ£ĞÍ¶¨Òå  
-    ©À©¤©¤ urls.py              #Â·ÓÉÉèÖÃ  
-    ©À©¤©¤ views.py             #DjangoÊÓÍ¼  
-    ©À©¤©¤ tests.py             #µ¥Ôª²âÊÔ  
-    ©¸©¤©¤ front_utils.py       #Êı¾İ·ÃÎÊÄ£¿é¡¢²¿·ÖÎÄ±¾Ëã·¨  
+Python>=3.6.0  
+Django>=2.1.0  
+requests>=2.19.0  
+scikit-learn>=0.19  
+tushare  
+jieba  
+mysqlclient  
+```
+
+## æ–‡ä»¶ç›®å½•
+```
+â”œâ”€â”€ data  
+â”‚   â”œâ”€â”€ clf                  #è´å¶æ–¯æ¨¡å‹  
+â”‚   â”œâ”€â”€ tfidf                #TF-IDFæ¨¡å‹  
+â”‚   â”œâ”€â”€ vect                 #è¯é¢‘æ¨¡å‹  
+â”‚   â”œâ”€â”€ worddict             #ç”¨æˆ·è¯å…¸  
+â”‚   â”œâ”€â”€ stop_words.txt       #åœç”¨è¯è¯å…¸   
+â”œâ”€â”€ InvisibleHand  
+â”‚   â”œâ”€â”€ settings.py          #é¡¹ç›®é…ç½®  
+â”‚   â”œâ”€â”€ urls.py              #é¡¹ç›®è·¯ç”±å®šä¹‰  
+â”‚   â””â”€â”€ wsgi.py              #HTTPæœåŠ¡å™¨çš„æ¥å£  
+â””â”€â”€ Sentiment  
+    â””â”€â”€ templates            #ç½‘é¡µé™æ€æ–‡ä»¶ç›®å½•
+        â””â”€â”€ Sentiment  
+            â”œâ”€â”€ home.js      #ä¸»é¡µè„šæœ¬  
+            â”œâ”€â”€ 404.js       #æœªæ‰¾åˆ°é¡µé¢è„šæœ¬  
+            â”œâ”€â”€ search.js    #æœç´¢é¡µè„šæœ¬  
+            â”œâ”€â”€ hot.js       #è¿‘æœŸçƒ­ç‚¹é¡µé¢è„šæœ¬  
+            â”œâ”€â”€ text.js      #æ–‡æœ¬åˆ†æé¡µé¢è„šæœ¬   
+            â”œâ”€â”€ detial.js    #ä¸ªè‚¡è¯¦æƒ…é¡µé¢è„šæœ¬  
+            â”œâ”€â”€ global.js    #ç½‘ç«™å…¨å±€è„šæœ¬  
+            â””â”€â”€ global.css   #ç½‘ç«™å…¨å±€æ ·å¼  
+    â”œâ”€â”€ static               #ç½‘é¡µé™æ€æ–‡ä»¶ç›®å½•  
+        â””â”€â”€ Sentiment   
+            â”œâ”€â”€ home.html    #ä¸»é¡µæ¨¡æ¿  
+            â”œâ”€â”€ 404.html     #æœªæ‰¾åˆ°é¡µé¢æ¨¡æ¿  
+            â”œâ”€â”€ search.html  #æœç´¢é¡µæ¨¡æ¿  
+            â”œâ”€â”€ hot.html     #è¿‘æœŸçƒ­ç‚¹é¡µé¢æ¨¡æ¿  
+            â”œâ”€â”€ text.html    #æ–‡æœ¬åˆ†æé¡µé¢æ¨¡æ¿   
+            â””â”€â”€ detail.html  #ä¸ªè‚¡è¯¦æƒ…é¡µé¢æ¨¡æ¿  
+    â”œâ”€â”€ admin.py             #Djangoåå°çš„ç®¡ç†é¡µé¢  
+    â”œâ”€â”€ apps.py              #åº”ç”¨é…ç½®  
+    â”œâ”€â”€ models.py            #æ•°æ®æ¨¡å‹å®šä¹‰  
+    â”œâ”€â”€ urls.py              #è·¯ç”±è®¾ç½®  
+    â”œâ”€â”€ views.py             #Djangoè§†å›¾  
+    â”œâ”€â”€ tests.py             #å•å…ƒæµ‹è¯•  
+    â””â”€â”€ front_utils.py       #æ•°æ®è®¿é—®æ¨¡å—ã€éƒ¨åˆ†æ–‡æœ¬ç®—æ³•  
 ```
